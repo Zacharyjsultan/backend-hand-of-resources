@@ -23,6 +23,20 @@ describe('shoes routes', () => {
       cost: 60,
     });
   });
+
+  it('#POST /shoes/ adds new shoes', async () => {
+    const newShoe = {
+      brand: 'Emerica',
+      sole: 'vulcanized',
+      cost: 65,
+    };
+    const res = await request(app).post('/shoes').send(newShoe);
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      ...newShoe,
+    });
+  });
 });
 afterAll(() => {
   pool.end();
