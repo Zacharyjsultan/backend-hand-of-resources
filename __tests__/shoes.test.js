@@ -12,6 +12,17 @@ describe('shoes routes', () => {
     expect(res.status).toBe(200);
     expect(res.body.length === 4);
   });
+  it('#GET /shoes/:id displays single shoe', async () => {
+    const res = await request(app).get('/shoes/1');
+    console.log('res.body', res.body);
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({
+      id: '1',
+      brand: 'Converse',
+      sole: 'vulcanized',
+      cost: 60,
+    });
+  });
 });
 afterAll(() => {
   pool.end();
